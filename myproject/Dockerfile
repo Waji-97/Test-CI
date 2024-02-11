@@ -1,5 +1,5 @@
 # Use the official Python image as a parent image
-FROM python:3.8
+FROM python:3.12.1-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
