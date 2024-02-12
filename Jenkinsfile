@@ -31,7 +31,7 @@ node("jenkins-agent") {
             sh 'git config user.name "Waji-97"'
             sh 'git add .'
             sh 'git commit -m "Update image tag to ${BUILD_NUMBER}"'
-            sh 'git push'
+            sh 'git push origin main'
         }
     }
 }
