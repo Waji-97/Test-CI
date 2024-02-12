@@ -11,6 +11,7 @@ pipeline {
             steps {
                 // Run Django tests
                 dir('myproject') {
+                    sh 'pip install -r requirements.txt'
                     sh 'python manage.py test'
                 }
             }
