@@ -26,7 +26,7 @@ node("jenkins-agent") {
         git branch: 'main', url: 'https://github.com/Waji-97/Test-CD-IaC.git'
         container('jenkins-agent'){
             withCredentials([usernamePassword(credentialsId: 'github-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-                dir('Test-CD-IaC') {
+                dir('`pwd`/Test-CD-IaC') {
                 sh 'git config --global credential.helper "store --file ~/.git-credentials"'
                 sh "echo 'https://$USERNAME:$PASSWORD@github.com' > ~/.git-credentials"
                 sh 'sed -i "s|image: waji97/test-ci:.*|image: waji97/test-ci:${BUILD_NUMBER}|" `pwd`/deploy.yaml'
