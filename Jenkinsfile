@@ -19,19 +19,20 @@ pipeline {
             }
         }
 
-        stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    // Build the Docker image
-                    docker.build "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
-
-                    // Push the Docker image to Docker Hub
-                    docker.withRegistry('https://hub.docker.com', DOCKER_REGISTRY_CREDENTIALS) {
-                        docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}").push()
+            stage('Build and Push Docker Image') {
+                steps {
+                    script {
+                        // Build the Docker image
+                        docker.build "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+            
+                        // Push the Docker image to Docker Hub
+                        docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS) {
+                            docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}").push()
+                        }
                     }
                 }
             }
-        }
+
 
         stage('Update Infrastructure Code') {
             steps {
