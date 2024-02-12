@@ -1,8 +1,8 @@
 node("jenkins-agent") {
     stage ('Test') {
         container('jenkins-agent'){
+            git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
             dir('myproject') {
-                git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate'
                 sh 'pip install -r requirements.txt --break-system-packages'
