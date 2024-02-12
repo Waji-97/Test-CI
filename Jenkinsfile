@@ -15,7 +15,7 @@ node("jenkins-agent") {
         container('kaniko'){
             script {
                 sh '''
-                /kaniko/executor --dockerfile `pwd/myproject`/Dockerfile --context `pwd` --destination=waji97/test-ci:${BUILD_NUMBER}
+                /kaniko/executor --dockerfile `pwd`myproject/Dockerfile --context `pwd` --destination=waji97/test-ci:${BUILD_NUMBER}
                 '''
             }
         }
