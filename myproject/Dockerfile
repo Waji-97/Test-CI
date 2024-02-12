@@ -9,11 +9,11 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # Install dependencies
-COPY requirements.txt /app/
+COPY myproject/requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy project files into the working directory
-COPY . /app/
+COPY myproject /app/
 
 # Expose port 8000
 EXPOSE 8000
