@@ -12,7 +12,7 @@ pipeline {
                 // Run Django tests
                 dir('myproject') {
                     sh 'python -m venv venv'
-                    sh 'source venv/bin/activate'
+                    sh '. venv/bin/activate'
                     sh 'pip install -r requirements.txt'
                     sh 'python manage.py test'
                 }
