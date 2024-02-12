@@ -1,4 +1,4 @@
-node("any") {
+node("jenkins-agent") {
     git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
     stage ('Test') {
         container('jenkins-agent'){
