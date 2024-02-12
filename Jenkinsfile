@@ -27,6 +27,8 @@ node("jenkins-agent") {
                 checkout([$class: 'GitSCM',
                           branches: [[name: 'main']],
                           userRemoteConfigs: [[url: 'https://github.com/Waji-97/Test-CD-IaC.git']]])
+                sh 'git config --global credential.helper "store --file ~/.git-credentials"'
+                sh "echo 'https://$USERNAME:$PASSWORD@github.com' > ~/.git-credentials"
                 sh 'sed -i "s|image: waji97/test-ci:.*|image: waji97/test-ci:${BUILD_NUMBER}|" deploy.yaml'
                 sh 'git config user.email "wajiwos16@gmail.com"'
                 sh 'git config user.name "Waji-97"'
