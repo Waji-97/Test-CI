@@ -1,6 +1,6 @@
 node("jenkins-agent") {
-    git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
     stage ('Test') {
+        git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
         container('jenkins-agent'){
             dir('myproject') {
                 sh 'python3 -m venv venv'
@@ -12,6 +12,7 @@ node("jenkins-agent") {
     }
 
     stage ('Build & Push Docker Image') {
+        git branch: 'main', url: 'https://github.com/Waji-97/Test-CI-App.git'
         container('kaniko'){
             script {
                 sh '''
