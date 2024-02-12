@@ -9,11 +9,10 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                // Checkout the source code
-                checkout scm
-
                 // Run Django tests
-                sh 'python manage.py test'
+                dir('myproject') {
+                    sh 'python manage.py test'
+                }
             }
         }
 
