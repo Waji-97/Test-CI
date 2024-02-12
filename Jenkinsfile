@@ -23,11 +23,11 @@ pipeline {
                 steps {
                     script {
                         // Build the Docker image
-                        docker.build "${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}"
+                        docker.build "${DOCKER_IMAGE_NAME}:v${env.BUILD_NUMBER}"
             
                         // Push the Docker image to Docker Hub
                         docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS) {
-                            docker.image("${DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}").push()
+                            docker.image("${DOCKER_IMAGE_NAME}:v${env.BUILD_NUMBER}").push()
                         }
                     }
                 }
@@ -42,13 +42,13 @@ pipeline {
                           userRemoteConfigs: [[url: 'https://github.com/Waji-97/Test-CD-IaC.git']]])
 
                 // Update the image tag in the infrastructure code
-                sh 'sed -i "s|image: waji97/test-ci:.*|image: waji97/test-ci:${env.BUILD_NUMBER}|" deploy.yaml'
+                sh 'sed -i "s|image: waji97/test-ci:.*|image: waji97/test-ci:v${env.BUILD_NUMBER}|" deploy.yaml'
 
                 // Commit and push changes
                 sh 'git config user.email "wajiwos16@gmail.com"'
                 sh 'git config user.name "Waji-97"'
                 sh 'git add .'
-                sh 'git commit -m "Update image tag to ${env.BUILD_NUMBER}"'
+                sh 'git commit -m "Update image tag to v${env.BUILD_NUMBER}"'
                 sh 'git push'
             }
         }
